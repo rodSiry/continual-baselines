@@ -16,7 +16,9 @@ def residual_layer(out, upsampling='down'):
     elif upsampling == 'up':
         last = hk.Conv2DTranspose(out, (2, 2), stride=2)
 
-    return lambda x : last(short(x) + nn.relu(second(nn.relu(first(x)))))
+    norm = hk.LayerNorm(create_scale=True, create_offset=True, axis=-1)
+
+    return lambda x : last(norm(short(x) + nn.relu(second(nn.relu(first(x))))))
 
 def resnet_forward(x):
     x = jnp.transpose(x, [0, 2, 3, 1])
@@ -35,6 +37,6 @@ def resnet_forward(x):
 
     y = jnp.reshape(y, (y.shape[0], -1))
 
-    ly5 = hk.Linear(10)
+    ly5 = hk.Linear(100)
     y = ly5(y)
     return y

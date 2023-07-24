@@ -4,12 +4,13 @@ from models.utils import tree_dot_product
 import jax
 import functools
 class Trainer:
-    def __init__(self, key, model, criterion, n_iters, bs):
+    def __init__(self, key, model, criterion, n_iters, bs, logger=None):
         self.key = key
         self.model = hk.transform(model)
         self.criterion = criterion
         self.n_iters = n_iters
         self.bs = bs
+        self.logger = logger
 
     @functools.partial(jax.jit, static_argnums=(0,))
     def init_theta(self, key, x):

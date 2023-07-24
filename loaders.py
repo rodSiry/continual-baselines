@@ -18,7 +18,7 @@ class SequenceGenerator:
         self,
         seq_len=1000,
         dataset_list=["mnist", "cifar10", "svhn"],
-        correlation="ci",
+        correlation="iid",
         fold="train",
         shuffle_class=True,
         shuffle_dset=False,

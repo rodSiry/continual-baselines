@@ -1,0 +1,6 @@
+aim
+jax
+jaxlib
+torch
+torchvision
+pyyaml

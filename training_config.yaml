@@ -1,0 +1,4 @@
+model: 'convnet'
+lr: 1e-4
+bs: 64
+task_len: 1000
